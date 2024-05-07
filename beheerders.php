@@ -51,3 +51,28 @@ class Beheerders
 
         return ($stmt->num_rows > 0);
     }
+
+    public function validateBeheerder($gebruikersnaam, $wachtwoord)
+    {
+        $query = "SELECT beheerderid, wachtwoord FROM beheerders WHERE gebruikersnaam = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if (!$stmt) {
+            die("Voorbereiden mislukt: (" . $this->conn->errno . ") " . $this->conn->error);
+        }
+
+        $stmt->bind_param("s", $gebruikersnaam);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($beheerderid, $hashedPassword);
+            $stmt->fetch();
+
+            if (password_verify($wachtwoord, $hashedPassword)) {
+                return $beheerderid;
+            }
+        }
+        return false;
+    }
+}
