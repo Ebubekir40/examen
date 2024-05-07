@@ -31,4 +31,23 @@ class Producten
             die("Uitvoeren mislukt: (" . $stmt->errno . ") " . $stmt->error);
         }
     }
+
+    public function getGebruikteStellingen()
+    {
+        // Query om alle gebruikte stellingsnummers op te halen
+        $query = "SELECT DISTINCT stellingsnummer FROM producten";
+        $result = $this->conn->query($query);
+
+        $gebruikteStellingen = array();
+
+        // Controleer of er resultaten zijn
+        if ($result && $result->num_rows > 0) {
+            // Loop door elk resultaat en voeg de stellingsnummers toe aan de $gebruikteStellingen array
+            while ($row = $result->fetch_assoc()) {
+                $gebruikteStellingen[] = $row['stellingsnummer'];
+            }
+        }
+
+        return $gebruikteStellingen;
+    }
 }
