@@ -1,5 +1,4 @@
 <?php
-
 require_once 'db.php';
 
 class Producten
@@ -47,4 +46,23 @@ class Producten
 
         return $gebruikteStellingen;
     }
+    public function getProducten()
+    {
+
+        $query = "SELECT * FROM producten";
+        $result = $this->conn->query($query);
+
+        $producten = array();
+
+
+        if ($result && $result->num_rows > 0) {
+
+            while ($row = $result->fetch_assoc()) {
+                $producten[] = $row;
+            }
+        }
+
+        return $producten;
+    }
+
 }
