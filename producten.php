@@ -64,5 +64,23 @@ class Producten
 
         return $producten;
     }
+    public function zoekProductOpId($productid)
+    {
+        $query = "SELECT productid, productnaam, afbeelding, aantal, datum, stellingsnummer FROM producten WHERE productid = ?";
+        $stmt = $this->conn->prepare($query);
 
+        if (!$stmt) {
+            die("Voorbereiden mislukt: (" . $this->conn->errno . ") " . $this->conn->error);
+        }
+
+        $stmt->bind_param("i", $productid);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
+    }
 }
