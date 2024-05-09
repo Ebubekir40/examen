@@ -86,17 +86,16 @@ class Producten
         }
     }
 
-    public function updateProduct($productid, $aantal, $stellingsnummer)
+    public function updateProduct($productid, $productnaam, $aantal, $stellingsnummer)
     {
-        $query = "UPDATE producten SET aantal = ?, stellingsnummer = ?, datum = CURRENT_TIMESTAMP WHERE productid = ?";
+        $query = "UPDATE producten SET productnaam = ?, aantal = ?, stellingsnummer = ?, datum = CURRENT_TIMESTAMP WHERE productid = ?";
         $stmt = $this->conn->prepare($query);
 
         if (!$stmt) {
             die("Voorbereiden mislukt: (" . $this->conn->errno . ") " . $this->conn->error);
         }
 
-        $stmt->bind_param("isi", $aantal, $stellingsnummer, $productid);
-
+        $stmt->bind_param("sisi", $productnaam, $aantal, $stellingsnummer, $productid);
 
         if ($stmt->execute()) {
             return true;
