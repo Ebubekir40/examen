@@ -52,7 +52,7 @@ class Beheerders
         return ($stmt->num_rows > 0);
     }
 
-    public function validateBeheerder($gebruikersnaam, $wachtwoord)
+    public function geldigeBeheerder($gebruikersnaam, $wachtwoord)
     {
         $query = "SELECT beheerderid, wachtwoord FROM beheerders WHERE gebruikersnaam = ?";
         $stmt = $this->conn->prepare($query);
@@ -75,4 +75,119 @@ class Beheerders
         }
         return false;
     }
+
+    public function zoekBeheerderOpId($beheerderid)
+    {
+        $query = "SELECT beheerderid, gebruikersnaam, voornaam, achternaam, email FROM beheerders WHERE beheerderid = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if (!$stmt) {
+            die("Voorbereiden mislukt: (" . $this->conn->errno . ") " . $this->conn->error);
+        }
+
+        $stmt->bind_param("i", $beheerderid);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
+    }
+    public function updateBeheerderVoornaam($beheerderid, $nieuweVoornaam)
+    {
+        $query = "UPDATE beheerders SET voornaam = ? WHERE beheerderid = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if (!$stmt) {
+            die("Voorbereiden mislukt: (" . $this->conn->errno . ") " . $this->conn->error);
+        }
+
+        $stmt->bind_param("si", $nieuweVoornaam, $beheerderid);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            $error = "Uitvoeren mislukt: (" . $stmt->errno . ") " . $stmt->error;
+            return $error;
+        }
+    }
+    public function updateBeheerderAchternaam($beheerderid, $nieuweAchternaam)
+    {
+        $query = "UPDATE beheerders SET achternaam = ? WHERE beheerderid = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if (!$stmt) {
+            die("Voorbereiden mislukt: (" . $this->conn->errno . ") " . $this->conn->error);
+        }
+
+        $stmt->bind_param("si", $nieuweAchternaam, $beheerderid);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            $error = "Uitvoeren mislukt: (" . $stmt->errno . ") " . $stmt->error;
+            return $error;
+        }
+    }
+    public function updateBeheerderEmail($beheerderid, $nieuweEmail)
+    {
+        $query = "UPDATE beheerders SET email = ? WHERE beheerderid = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if (!$stmt) {
+            die("Voorbereiden mislukt: (" . $this->conn->errno . ") " . $this->conn->error);
+        }
+
+        $stmt->bind_param("si", $nieuweEmail, $beheerderid);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            $error = "Uitvoeren mislukt: (" . $stmt->errno . ") " . $stmt->error;
+            return $error;
+        }
+    }
+
+    public function updateBeheerderGebruikersnaam($beheerderid, $nieuweGebruikersnaam)
+    {
+        $query = "UPDATE beheerders SET gebruikersnaam = ? WHERE beheerderid = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if (!$stmt) {
+            die("Voorbereiden mislukt: (" . $this->conn->errno . ") " . $this->conn->error);
+        }
+
+        $stmt->bind_param("si", $nieuweGebruikersnaam, $beheerderid);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            $error = "Uitvoeren mislukt: (" . $stmt->errno . ") " . $stmt->error;
+            return $error;
+        }
+    }
+
+    public function updateBeheerderWachtwoord($beheerderid, $nieuwWachtwoord)
+    {
+        $hashedPassword = password_hash($nieuwWachtwoord, PASSWORD_DEFAULT);
+
+        $query = "UPDATE beheerders SET wachtwoord = ? WHERE beheerderid = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if (!$stmt) {
+            die("Voorbereiden mislukt: (" . $this->conn->errno . ") " . $this->conn->error);
+        }
+
+        $stmt->bind_param("si", $hashedPassword, $beheerderid);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            $error = "Uitvoeren mislukt: (" . $stmt->errno . ") " . $stmt->error;
+            return $error;
+        }
+    }
 }
+?>
