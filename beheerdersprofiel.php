@@ -20,9 +20,7 @@ $huidigeBeheerder = $beheerders->zoekBeheerderOpId($beheerderid);
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Checken of alles is ingevuld
     if (isset($_POST['nieuweVoornaam'], $_POST['nieuweAchternaam'], $_POST['nieuweEmail'], $_POST['nieuweGebruikersnaam'], $_POST['nieuwWachtwoord'])) {
-        // Voer de updates uit
         $nieuweVoornaam = $_POST['nieuweVoornaam'];
         $nieuweAchternaam = $_POST['nieuweAchternaam'];
         $nieuweEmail = $_POST['nieuweEmail'];
