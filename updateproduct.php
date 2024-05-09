@@ -15,21 +15,18 @@ if (!isset($_GET['productid'])) {
 
 $productid = $_GET['productid'];
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    $productnaam = $_POST['productnaam'];
     $aantal = $_POST['aantal'];
     $stellingsnummer = $_POST['stellingsnummer'];
 
-
     $producten = new Producten();
-    $producten->updateProduct($productid, $aantal, $stellingsnummer);
-
+    $producten->updateProduct($productid, $productnaam, $aantal, $stellingsnummer);
 
     header("Location: zoekproduct.php?productid=$productid");
     exit();
 }
-
 
 $producten = new Producten();
 $product = $producten->zoekProductOpId($productid);
@@ -84,6 +81,8 @@ $beschikbareStellingen = array_diff($alleStellingen, $gebruikteStellingen);
     <?php
     echo '<img class="product-image" src="' . $product['afbeelding'] . '" alt="Product Afbeelding"><br>';
     echo "<form action='updateproduct.php?productid=$productid' method='post'>";
+    echo "<label for='productnaam'>Productnaam:</label>";
+    echo "<input type='text' id='productnaam' name='productnaam' value='{$product['productnaam']}' required><br>";
     echo "<label for='aantal'>Aantal:</label>";
     echo "<input type='number' id='aantal' name='aantal' value='{$product['aantal']}' required><br>";
     echo "<label for='stellingsnummer'>Stellingsnummer:</label>";
