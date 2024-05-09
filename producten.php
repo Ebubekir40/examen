@@ -83,4 +83,22 @@ class Producten
             return null;
         }
     }
+    public function updateProduct($productid, $aantal, $stellingsnummer)
+    {
+        $query = "UPDATE producten SET aantal = ?, stellingsnummer = ?, datum = CURRENT_TIMESTAMP WHERE productid = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if (!$stmt) {
+            die("Voorbereiden mislukt: (" . $this->conn->errno . ") " . $this->conn->error);
+        }
+
+        $stmt->bind_param("isi", $aantal, $stellingsnummer, $productid);
+
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            die("Uitvoeren mislukt: (" . $stmt->errno . ") " . $stmt->error);
+        }
+    }
 }
