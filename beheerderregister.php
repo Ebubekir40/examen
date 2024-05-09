@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$beheerders->gebruikersnaambezet($gebruikersnaam)) {
         if (substr($email, -strlen("@adminpochon.nl")) === "@adminpochon.nl") {
-            if ($beheerders->create($gebruikersnaam, $wachtwoord, $voornaam, $achternaam, $email)) {
+            if ($beheerders->maak($gebruikersnaam, $wachtwoord, $voornaam, $achternaam, $email)) {
                 header("Location: beheerderlogin.php?success=1");
                 exit();
             } else {

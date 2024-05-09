@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 </head>
 <body>
-
 <h1></h1>
 
 <?php
@@ -20,11 +18,10 @@ if (!isset($_SESSION['beheerderid'])) {
 }
 ?>
 
-<form id="searchForm" action="searchproduct.php" method="GET">
+<form id="searchForm" action="zoekproduct.php" method="GET">
     <label for="productid">Voer product ID in:</label>
     <input type="text" id="productid" name="productid">
     <input type="submit" value="Zoeken">
 </form>
-
 </body>
 </html>

@@ -9,7 +9,7 @@ require_once 'producten.php';
 require_once 'hoofd1.php';
 
 if (!isset($_GET['productid'])) {
-    header("Location: searchproduct.php");
+    header("Location: zoekproduct.php");
     exit();
 }
 
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $producten->updateProduct($productid, $aantal, $stellingsnummer);
 
 
-    header("Location: productdetails.php?productid=$productid");
+    header("Location: zoekproduct.php?productid=$productid");
     exit();
 }
 
@@ -35,11 +35,11 @@ $producten = new Producten();
 $product = $producten->zoekProductOpId($productid);
 
 if (!$product) {
-    header("Location: searchproduct.php");
+    header("Location: zoekproduct.php");
     exit();
 }
 
-$gebruikteStellingen = $producten->getGebruikteStellingen();
+$gebruikteStellingen = $producten->krijgGebruikteStellingen();
 
 $alleStellingen = range(1, 100);
 $beschikbareStellingen = array_diff($alleStellingen, $gebruikteStellingen);

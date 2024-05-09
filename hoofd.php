@@ -23,7 +23,7 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <a class="navbar-brand" href="index.php"><img src="pochonlogo" alt="Logo"></a>
+        <a class="navbar-brand" href="index.php"><img src="pochon%20logo" alt="Logo"></a>
 </header>
 </body>
 

@@ -7,7 +7,6 @@ require_once 'producten.php';
 
 
 if ($_FILES['afbeelding']['error'] == 4) {
-    // Er is geen afbeelding geüpload
     $afbeelding = null;
 } elseif ($_FILES['afbeelding']['error'] !== UPLOAD_ERR_OK) {
     echo "Er is een fout opgetreden bij het uploaden van de afbeelding: " . $_FILES['afbeelding']['error'];
@@ -34,11 +33,11 @@ $productnaam = $_POST['productnaam'];
 $stellingsnummer = $_POST['stellingsnummer'];
 
 $producten = new Producten();
-$productinfo = $producten->createProduct($productnaam, $afbeelding, $aantal, $stellingsnummer);
+$productinfo = $producten->maakProduct($productnaam, $afbeelding, $aantal, $stellingsnummer);
 
 $message = "Product succesvol toegevoegd. Product ID: {$productinfo['productid']}";
 $_SESSION['success_message'] = $message;
 
-header("Location: createproduct1.php");
+header("Location: alleproducten.php");
 exit();
 ?>

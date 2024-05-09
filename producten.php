@@ -11,7 +11,7 @@ class Producten
         $this->conn = $dbConnection->getConnection();
     }
 
-    public function createProduct($productnaam, $afbeelding, $aantal, $stellingsnummer)
+    public function maakProduct($productnaam, $afbeelding, $aantal, $stellingsnummer)
     {
 
         $query = "INSERT INTO producten (productnaam, afbeelding, aantal, stellingsnummer) VALUES (?, ?, ?, ?)";
@@ -31,7 +31,7 @@ class Producten
         }
     }
 
-    public function getGebruikteStellingen()
+    public function krijgGebruikteStellingen()
     {
 
         $query = "SELECT DISTINCT stellingsnummer FROM producten";
@@ -47,7 +47,7 @@ class Producten
         return $gebruikteStellingen;
     }
 
-    public function getProducten()
+    public function krijgProducten()
     {
 
         $query = "SELECT * FROM producten";

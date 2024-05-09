@@ -64,7 +64,7 @@ require_once 'hoofd1.php';
         <?php
 
         $producten = new Producten();
-        $productenLijst = $producten->getProducten();
+        $productenLijst = $producten->krijgProducten();
 
         foreach ($productenLijst as $product) {
             echo "<div class='product-card' data-productid='{$product['productid']}' onclick='doorsturenNaarZoeken({$product['productid']})'>"; // Voeg een data-attribuut toe voor het productid en voeg een onclick-event toe
@@ -81,7 +81,7 @@ require_once 'hoofd1.php';
 
 <script>
     function doorsturenNaarZoeken(productId) {
-        window.location.href = `searchproduct.php?productid=${productId}`;
+        window.location.href = `zoekproduct.php?productid=${productId}`;
     }
 </script>
 

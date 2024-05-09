@@ -10,14 +10,14 @@ require_once 'hoofd1.php';
 
 
 $producten = new Producten();
-$productenLijst = $producten->getProducten();
+$productenLijst = $producten->krijgProducten();
 
 usort($productenLijst, function($a, $b) {
     return strtotime($b['datum']) - strtotime($a['datum']);
 });
 
 
-$gebruikteStellingen = $producten->getGebruikteStellingen();
+$gebruikteStellingen = $producten->krijgGebruikteStellingen();
 $beschikbareStellingen = array_diff(range(1, 25), $gebruikteStellingen);
 ?>
 

@@ -11,7 +11,7 @@ class Beheerders
         $this->conn = $dbConnection->getConnection();
     }
 
-    public function create($gebruikersnaam, $wachtwoord, $voornaam, $achternaam, $email)
+    public function maak($gebruikersnaam, $wachtwoord, $voornaam, $achternaam, $email)
     {
         $query = "INSERT INTO beheerders (gebruikersnaam, wachtwoord, voornaam, achternaam, email) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);

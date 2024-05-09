@@ -7,10 +7,9 @@ if (!isset($_SESSION['beheerderid'])) {
     exit();
 }
 
-
 $producten = new Producten();
 // Alle gebruikte stellingsnummers ophalen
-$gebruikteStellingen = $producten->getGebruikteStellingen();
+$gebruikteStellingen = $producten->krijgGebruikteStellingen();
 $beschikbareStellingen = array_diff(range(1, 25), $gebruikteStellingen);
 ?>
 
@@ -26,7 +25,7 @@ $beschikbareStellingen = array_diff(range(1, 25), $gebruikteStellingen);
 <body>
 <div class="container">
     <h2 class="mt-3">Product Toevoegen</h2>
-    <form action="createproduct.php" method="post" enctype="multipart/form-data">
+    <form action="maakproduct.php" method="post" enctype="multipart/form-data">
 
         <div class="mb-3">
             <label for="productnaam" class="form-label">Productnaam:</label>

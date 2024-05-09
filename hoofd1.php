@@ -50,7 +50,7 @@ session_start();
     <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-            <a class="navbar-brand" href="index.php"><img src="pochonlogo" alt="Logo"></a>
+            <a class="navbar-brand" href="index.php"><img src="pochon%20logo" alt="Logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -58,10 +58,13 @@ session_start();
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
+                        <a class="nav-link" href="zoekproduct1.php">Zoeken</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="alleproducten.php">Producten</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="createproduct1.php">Product toevoegen</a>
+                        <a class="nav-link" href="maakproduct1.php">Product toevoegen</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="beheerdersdashboard.php">laatst geüpdatet </a>

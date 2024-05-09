@@ -62,7 +62,7 @@ if (isset($_GET['productid'])) {
         echo "Datum: " . $gevondenProduct['datum'] . "<br>";
         echo "Stellingsnummer: " . $gevondenProduct['stellingsnummer'] . "<br>";
 
-        echo '<form action="deleteproduct.php" method="GET">
+        echo '<form action="verwijderproduct.php" method="GET">
                   <input type="hidden" name="productid" value="' . $gevondenProduct['productid'] . '">
                   <button type="submit">Verwijder Product</button>
               </form>';
