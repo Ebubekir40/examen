@@ -46,6 +46,7 @@ class Producten
 
         return $gebruikteStellingen;
     }
+
     public function getProducten()
     {
 
@@ -64,6 +65,7 @@ class Producten
 
         return $producten;
     }
+
     public function zoekProductOpId($productid)
     {
         $query = "SELECT productid, productnaam, afbeelding, aantal, datum, stellingsnummer FROM producten WHERE productid = ?";
@@ -83,6 +85,7 @@ class Producten
             return null;
         }
     }
+
     public function updateProduct($productid, $aantal, $stellingsnummer)
     {
         $query = "UPDATE producten SET aantal = ?, stellingsnummer = ?, datum = CURRENT_TIMESTAMP WHERE productid = ?";
@@ -97,6 +100,23 @@ class Producten
 
         if ($stmt->execute()) {
             return true;
+        } else {
+            die("Uitvoeren mislukt: (" . $stmt->errno . ") " . $stmt->error);
+        }
+    }
+
+    public function verwijderProduct($productid)
+    {
+        $query = "DELETE FROM producten WHERE productid = ?";
+        $stmt = $this->conn->prepare($query);
+
+        if (!$stmt) {
+            die("Voorbereiden mislukt: (" . $this->conn->errno . ") " . $this->conn->error);
+        }
+
+        $stmt->bind_param("i", $productid);
+
+        if ($stmt->execute()) {
         } else {
             die("Uitvoeren mislukt: (" . $stmt->errno . ") " . $stmt->error);
         }
